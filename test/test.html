@@ -49,9 +49,23 @@
 
 <div class="test" id="1" >테스트 </div>
 <script>
-let test=document.querySelector('div.test'); 
-let id=test.id;
-console.log("test:찾은아이디의값"+id); 
+// let test=document.querySelector('div.test'); 
+// let id=test.id;
+// console.log("test:찾은아이디의값"+id); 
+let test=[]; 
+let id="1";
+let product="product";
+let qty="qty"; 
+
+let add={id:id,
+  product:product,
+  qty:qty
+}
+
+test.push(add); 
+console.log(test); 
+
+
 </script>
 
 </body>
