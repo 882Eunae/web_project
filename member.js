@@ -3,7 +3,7 @@
 let members=[]; 
 members=JSON.parse(localStorage.getItem('members')); //문자열 -> 객체   
 console.log(members); 
-//memvers의 값을 활용해서 tbody 영역의 html 작성. 
+//memvers의 값을 활용해서 tbody 영역의 htm(l 작성. 
 members.forEach(function (elem,idx,ary){
     document.querySelector('#list').innerHTML+=makeRow(elem); 
 }); 
