@@ -70,10 +70,14 @@ let span = `<span id='totalspan'>${total}원</span>`;
 
 total_pos.insertAdjacentHTML('beforeend', span);
 
+let plusPrice=0; //누를때마다 초기화...? + 버튼 누를때마다 초기화됨  
 //queryselectorAll:  
 document.querySelectorAll('span.inc.qtybtn').forEach(
   item => {
+   
+    
     item.addEventListener('click', function (e) {
+      plusPrice=0; //일단 클릭한번할때마다 추가되는 가격을 초기화 시킴 
       let plus_pos = item.id; //id="${cartNum}"     
       console.log("pluspos의값:" + plus_pos); //위치가어딘지 앎 id:3 이런식으로 뜸 
       let plus_Item = document.querySelector(`#cartData${plus_pos} >div.product__cart__item__text>h6`);
@@ -81,8 +85,8 @@ document.querySelectorAll('span.inc.qtybtn').forEach(
       let input_pos = document.querySelector(`#input${plus_pos}`); //input태그에 위치 찾긴한듯? ;; 
       console.log("input의 value값" + input_pos.value);
       let plusNum = Number(input_pos.value);
-      plusNum++; //추가된값 총 몇개인지 보고    
-      console.log(plusNum);
+      plusNum++; //추가된값 총 몇개인지 보고  
+      console.log("plusNum의값:"+plusNum);
       //total값을 바꾸어야함 
       // let total_plus = Number(document.querySelector('div.cart__total span').innerHTML); //total에 들어있는값을 숫자형태로 바꿈
       plusNum = String(plusNum);
@@ -90,30 +94,44 @@ document.querySelectorAll('span.inc.qtybtn').forEach(
       console.log("inputpos의값" + input_pos);
       console.log("cartNum" + cartNum);
       //수량을 화면위에 표시해줘야함
-      cartqty += Number(document.querySelector('div.pro-qty>input').value)
-      console.log(qty);
+      // cartqty += Number(document.querySelector('div.pro-qty>input').value)
+      // console.log(qty);
       // Number(document.querySelector('div.pro-qty>input').value)=cartqty; //
       console.log(Number(document.querySelector('div.pro-qty>input').value));
+
       //버튼을 누르면 item의 위치값을 id값에 저장 
+      //각각 요소 한줄한줄추가 버튼 누를때 가격값 커지는거 
+    //  let total_element= Number(document.querySelector(`#cart__price${plus_pos}`).innerHTML) *Number(plusNum); 
+      // document.querySelector(`#cart__price${plus_pos}`).innerHTML=total_element;
+
 
       console.log(`itemid의값:${item.id}`);
       console.log("total의위치" + document.querySelector('div.cart__total span'));
-      console.log("total에 들어잆는값");
-      console.log("가격정보가 들어있는곳"); //가격정보가 나옴  
-      let plusPrice=Number(document.querySelector(`#cart__price${plus_pos}`).innerHTML)*Number(plusNum-1) ; 
-      total+=plusPrice; //total아직 숫자값임  
-
+      
+      plusPrice=Number(document.querySelector(`#cart__price${plus_pos}`).innerHTML) ; //한번추가할때마다 그냥 1개가격만큼만 커지키로함
+      // total=total+plusPrice;  
+      console.log("각각요소에 관한 가격값:"+plusPrice); //
       total_pos.value=String(total);     
 
-       console.log("total의값:"+total);
+      let total_element= Number(document.querySelector(`#cart__price${plus_pos}`))+plusPrice;
+      
+      // console.log("각요소 합계:"+total_element);
+      // document.querySelector(`#cart_price${plus_pos}`).innerHTML=total_element; 
 
 
+       console.log("total의값:"+total)
+       ;
+       total=total+plusPrice; //값이 누적되서 가격이 더커져버림 
+      console.log("최종가격:"+total); 
 
+        document.querySelector('#totalspan').innerHTML=String(total)+"원"; 
+//커밋...9시56분....??
     })
   }) //end of foreach 
 
 
 
+console.log(plusPrice);
 
 
 document.querySelectorAll('span.icon__close').forEach(
