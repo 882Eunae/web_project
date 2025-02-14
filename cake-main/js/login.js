@@ -3,9 +3,10 @@
 let span; 
 console.log(user);
 console.log(memberData);  //local에서 memberData 잘 가져옴 
-document.querySelector('#loginbutton').addEventListener('click',function(e){
-
-  console.log('로그인 버튼을 눌렀습니다'); 
+// document.querySelector('#loginbutton').addEventListener('click',function(e){
+document.querySelector('form[name="loginForm"]').addEventListener('submit', function(e){
+  e.preventDefault();
+ console.log('로그인 버튼을 눌렀습니다'); 
 //버튼을 누르면 
   let id=document.querySelector('input[name="user_id"]').value; 
   let pw=document.querySelector('input[name="user_pw"]').value; 
@@ -16,7 +17,9 @@ document.querySelector('#loginbutton').addEventListener('click',function(e){
       console.log(id);
       alert('환영합니다!!');
       span=`<span>${id}</span>`; 
-      
+      localStorage.setItem('loginInfo', id);
+      // document.querySelector('div.cart__price').innerHTML=span;
+      location.href = "shoping-cart.html";
        return; 
     }
   }
